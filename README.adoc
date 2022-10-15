@@ -1,0 +1,45 @@
+image::doc/eflambe-torch-logo.png[E flambè Live, a tool for rapid profiling of Elixir code in Livebook]
+
+* Generate and view flamegraphs in livebook
+* Uses link:https://github.com/Stratus3D/eflambe[eFlambè] to generate flamegraphs
+
+== Screenshot and demo
+
+TODO: Add screenshot
+
+TODO: Add video
+
+== Description
+
+TODO: Add description
+
+== Installation
+
+TODO: Add the following line to your `mix.exs` file and then run `mix deps.get`:
+
+[source, elixir]
+----
+{:eflambe_live, "~> 0.1.0"}
+----
+
+== Usage
+
+TODO
+
+=== Options
+
+TODO
+
+== Implementation
+
+TODO
+
+Inspired by https://github.com/DockYard/flame_on
+
+== Contributing
+
+Feedback is welcome! This was started as a hackathon project but I plan on maintaining it for my teams every day use, so if you see something that could be improved please open an issue!
+
+==== Tagging Releases
+
+TODO
