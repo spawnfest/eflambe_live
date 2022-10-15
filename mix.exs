@@ -32,15 +32,14 @@ defmodule EflambeLive.MixProject do
       {:kino, "~> 0.7.0"},
 
       # Dev dependencies
-      {:credo, "~> 1.5.6", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.6.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
   end
 
   defp docs do
     # TODO
-    [
-    ]
+    []
   end
 
   defp package do
