@@ -19,7 +19,11 @@ TODO: Add the following line to your `mix.exs` file and then run `mix deps.get`:
 
 [source, elixir]
 ----
-{:eflambe_live, "~> 0.1.0"}
+def deps do
+  [
+    {:eflambe_live, "~> 0.1.0"}
+  ]
+end
 ----
 
 == Usage
