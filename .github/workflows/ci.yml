@@ -6,6 +6,8 @@ on:
       - synchronize
       - reopened
   push:
+    branches:
+      - master
 
 jobs:
   dependencies:
@@ -16,18 +18,18 @@ jobs:
         otp: ['24.3.4.5']
     steps:
       - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.9.0
+        uses: styfle/cancel-workflow-action@0.11.0
         with:
           access_token: ${{ github.token }}
       - name: Checkout Github repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Sets up an Erlang/OTP environment
         uses: erlef/setup-beam@v1
         with:
           elixir-version: ${{ matrix.elixir }}
           otp-version: ${{ matrix.otp }}
       - name: Retrieve cached dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: mix-cache
         with:
           path: |
@@ -52,18 +54,18 @@ jobs:
         otp: ['24.3.4.5']
     steps:
       - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.9.0
+        uses: styfle/cancel-workflow-action@0.11.0
         with:
           access_token: ${{ github.token }}
       - name: Checkout Github repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Sets up an Erlang/OTP environment
         uses: erlef/setup-beam@v1
         with:
           elixir-version: ${{ matrix.elixir }}
           otp-version: ${{ matrix.otp }}
       - name: Retrieve cached dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: mix-cache
         with:
           path: |
@@ -72,7 +74,7 @@ jobs:
             priv/plts
           key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles('mix.lock') }}
       - run: mix format --check-formatted
-      - run: mix credo
+      - run: mix credo --strict
   mix-test:
     runs-on: ubuntu-latest
     needs: dependencies
@@ -82,18 +84,18 @@ jobs:
         otp: ['24.3.4.5']
     steps:
       - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.9.0
+        uses: styfle/cancel-workflow-action@0.11.0
         with:
           access_token: ${{ github.token }}
       - name: Checkout Github repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Sets up an Erlang/OTP environment
         uses: erlef/setup-beam@v1
         with:
           elixir-version: ${{ matrix.elixir }}
           otp-version: ${{ matrix.otp }}
       - name: Retrieve cached dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: mix-cache
         with:
           path: |
@@ -103,14 +105,14 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles('mix.lock') }}
       - run: mix test --trace --slowest 10
   dialyzer:
-    name: Run Dialyzer for type checking
+    name: Dialyzer
     runs-on: ubuntu-latest
     strategy:
       matrix:
         elixir: ['1.14.1']
         otp: ['24.3.4.5']
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set mix file hash
         id: set_vars
         run: |
@@ -118,7 +120,7 @@ jobs:
           echo "::set-output name=mix_hash::$mix_hash"
       - name: Cache PLT files
         id: cache-plt
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             _build/dev/*.plt
