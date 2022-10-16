@@ -23,7 +23,7 @@ defmodule EflambeLive do
 
   @spec apply({fun(), list()} | {module(), atom(), list()}, Keyword.t()) :: Kino.JS.t()
 
-  def apply(function_and_args, options) do
+  def apply(function_and_args, options \\ []) do
     complete_options = Keyword.merge(options, @livebook_eflambe_options)
     content = :eflambe.apply(function_and_args, complete_options)
     display_flamegraph(content)
@@ -42,7 +42,7 @@ defmodule EflambeLive do
 
   @spec capture(mfa(), integer(), Keyword.t()) :: Kino.JS.t()
 
-  def capture(mfa, num_calls, options) do
+  def capture(mfa, num_calls, options \\ []) do
     complete_options = Keyword.merge(options, @livebook_eflambe_options)
     {:ok, content} = :eflambe.capture(mfa, num_calls, complete_options)
     display_flamegraph(content)
