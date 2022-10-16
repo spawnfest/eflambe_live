@@ -27,8 +27,7 @@ defmodule EflambeLive.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # TODO: Change this once eflambe changes are finalized
-      {:eflambe, github: "Stratus3D/eflambe"},
+      {:eflambe, "~> 0.3.0"},
       {:kino, "~> 0.7.0"},
 
       # Dev dependencies
