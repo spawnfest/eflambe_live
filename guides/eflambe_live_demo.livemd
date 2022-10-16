@@ -1,0 +1,28 @@
+# eFlambè Demo Notebook
+
+```elixir
+Mix.install([
+  {:kino, "~> 0.7.0"},
+  {:eflambe_live, path: "#{__DIR__}/.."}
+])
+```
+
+## Examples
+
+### eFlambè Flamegraphs in Livebook
+
+This integration automatically renders flamegraphs of function calls profiled with [eFlambè](https://github.com/Stratus3D/eflambe).
+
+For example, if you wanted to inspect the callstack of an Elixir function that runs slow when you have many environment variables set you could do the following:
+
+```elixir
+EflambeLive.apply({System, :get_env, []})
+```
+
+In a flamegraph the X axis represents time and the Y axis represents the callstack at a given point in time. Each box represents a single function call. A relatively slow function will appear as a wide bar on the graph, whereas a relatively quick one will appear as a very narrow bar. A tall flamegraph with many boxes indicates a deep callstack.
+
+Flamegraphs in Livebook are interactive. Run the code below to profile a very simple function that returns the head of a list. On the flame graph click on a box to zoom in on that portion of the callstack. You can also hover your cursor over the boxes and text will appear in the bottom left indicating what function call your cursor is over. Click "Reset zoom" in the top left to reset the flamegraph.
+
+```elixir
+EflambeLive.apply({:erlang, :hd, [[:a]]})
+```
